@@ -6,10 +6,13 @@ print("2. Subtraction")
 print("3. Multiply")
 print("4. Divide\n")
 
-choice = int(input())
+choice = int(input("Select your choice (1-4): "))
 
-num1 = float(input("Enter your first number: "))
-num2 = float(input("Enter your second number: "))
+if choice not in [1, 2, 3, 4]:
+    result = ("Invalid input.")
+else:
+    num1 = float(input("Enter your first number: "))
+    num2 = float(input("Enter your second number: "))
 
 if choice == 1:
     result = add(num1, num2)
