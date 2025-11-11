@@ -1,34 +1,63 @@
 from functions import add, subtract, multiply, divide
 
-print("Select your choice:")
-print("1. Addition")
-print("2. Subtraction")
-print("3. Multiply")
-print("4. Divide\n")
+def get_choice():
+    """Prompt user for operation choice and validate input."""
+    while True:
+        print("\nSelect your choice:")
+        print("1. Addition")
+        print("2. Subtraction")
+        print("3. Multiply")
+        print("4. Divide")
+        print("5. Quit")
+        choice = (input("\nEnter your choice (1-5): "))
+        if choice in ["1", "2", "3", "4", "5"]:
+            return int(choice)
+        print("Invalid input. Please enter a number between 1 and 5")
+        
+def get_number(prompt):
+    """Prompt user for a number and validate input."""
+    while True:
+        try:
+            return float(input(prompt))
+        except ValueError:
+            print("Invalid input. Please enter a valid number.")
 
-choice = int(input("Select your choice (1-4): "))
-
-if choice not in [1, 2, 3, 4]:
-    result = ("Invalid input.")
-else:
-    num1 = float(input("Enter your first number: "))
-    num2 = float(input("Enter your second number: "))
-
-if choice == 1:
-    result = add(num1, num2)
-elif choice == 2:
-    result = subtract(num1, num2)
-elif choice == 3:
-    result = multiply(num1, num2)
-elif choice == 4:
-    result = divide(num1, num2)
-else:
-    result = "Invalid input."
-
-if isinstance(result, str):
-    print(result) # it's an error message
-else:
-    if result == int(result):
-        print("Result: ", int(result)) # whole number, print as int
+def calculate(choice, num1, num2):
+    """Perform calculation based on choice."""
+    try:
+        if choice == 1:
+            return add(num1, num2)
+        elif choice == 2:
+            return subtract(num1, num2)
+        elif choice == 3:
+            return multiply(num1, num2)
+        elif choice == 4:
+            return divide(num1, num2)
+    except ZeroDivisionError:
+        return "Error: cannot divide by zero."
+    
+def print_result(result):
+    """Print the result nicely."""
+    if isinstance(result, str):
+        print(result)
     else:
-        print(f"Result: {result:.2f}") # decimal number, print with 2 decimal places
+        if result == int(result):
+            print("Result:", int(result))
+        else:
+            print(f"Result: {result:.2f}")
+
+def run_calculator():
+    """Main calculator loop."""
+    while True:
+        choice = get_choice()
+        if choice == 5:
+            print("Goodbye!")
+            break
+        num1 = get_number("Enter your first number: ")
+        num2 = get_number("Enter your second number: ")
+        result = calculate(choice, num1, num2)
+        print_result(result)
+
+# Run the calculator
+if __name__ == "__main__":
+    run_calculator()
