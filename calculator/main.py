@@ -37,7 +37,7 @@ def calculate(choice, num1, num2):
         return "Error: cannot divide by zero."
     
 def print_result(result):
-    """Print the result nicely."""
+    """Print result pretty."""
     if isinstance(result, str):
         print(result)
     else:
